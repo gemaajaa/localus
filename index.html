@@ -1,0 +1,167 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Localus: xl & gema</title>
+	<style type="text/css">
+		body{
+			padding:0;
+			margin:0;
+		}
+		.background{
+			position: fixed;
+			top:0;
+			left: 0;
+			width:100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background:aliceblue;
+			z-index: 0;
+		}
+		.background img{
+			opacity: .2;
+		}
+		.root{
+			width: 100%;
+			display: flex;
+			height: 100%;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+		}
+		.front{
+			z-index: 1;
+			font-size:16px;
+			width: 40%;
+			color: black;
+			font-family: calibri;
+			font-weight: bold;
+/*			font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;*/
+		}
+		.bigone{
+			margin:20px 0;
+			font-size:24px;
+			font-family: 'Courier New', Courier, monospace;
+		}
+
+		.loading{
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			background: white;
+			z-index: 2;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			color: gray;
+			font-family: calibri;
+			font-weight: bold;
+		}
+
+		@media screen and (max-width: 700px){
+        .bigone{
+            font-size: 16px;
+        }
+        .front{
+            width:auto;
+        }
+    }
+
+	</style>
+</head>
+<body>
+	<div class=loading id=loading>
+		Hanya Untuk<br>
+		Amelia Excel, Calon ( Hakim Dan Istriku ).<br>
+		Sedang memuat data...
+	</div>
+	<div class=root>
+		<div class=background>
+			<!-- background -->
+			<img src=./more/media/bg.png onload="hideLoading()">
+		</div>
+		<div class=front>
+			<!-- the things -->
+			<div style="opacity: .6;">
+        Dear Myxl<br>
+        Jelas, menemukanmu adalah keberuntungan<br>
+        Memilikimu bagaikan mukjizat<br>
+        Tertawa bersamamu, adalah kebahagiaan.<br>
+      </div>
+      <div class="bigone" id=timer>"00 Hari - 00 Jam - 00 Menit - 00 Detik"</div>
+      <div style="opacity: .6;margin-bottom: 20px;">
+        Di mataku, kamu itu bintang yang terus bercahaya<br>
+        Menyinari ruang gelapku dengan cinta yang hangat<br>
+        Di hatiku, kamu bagai angin yang lembut<br>
+        Membawa rasa damai yang menyejuk-kan.
+      </div>
+      <div style="opacity: .6;margin-bottom: 20px;">
+        Aku, ingin bersamamu setiap saat<br>
+        Menjadi sesuatu yang berharga<br>
+        Atau menjadi energi cadangan<br>
+        Yangg, jangan pernah redup!<br>
+       </div>
+       <div style="opacity: .6;">
+        Aku, yang pastinya jauh banget dari sempurna<br>
+        Cuma yangg, sama kamu aku ngerasa utuh, lengkap<br>
+        Jadi gini terus ya ayangg, tolong banget jangan berubah<br>
+        Terimakasih, ayangg 💖.
+      </div>
+      <div style="opacity: .6;margin-top:20px;font-size:12px;">
+        - Your future husband, Rahmat Agem Pratama.
+      </div>
+		</div>
+	</div>
+	<script>
+		// scripting
+		const bigone = document.querySelector('#timer');
+		const loading = document.querySelector('#loading');
+		let day,hour,minute,estimate,now;
+		const ourTime = '03/01/2024 14:00:00';
+		const ourTimeMs = new Date(ourTime).getTime();
+		const makeItDouble = (value)=>{
+			if(value.length < 2){
+				return `0${value}`;
+			}
+			return value;
+		}
+		const display = (d,h,m,e)=>{
+			const text = `"${makeItDouble(d)} Hari - ${makeItDouble(h)} Jam - ${makeItDouble(m)} Menit - ${makeItDouble(e)} Detik"`
+			bigone.innerHTML = text;
+		}
+		const hideLoading = ()=>{
+			loading.style.display = 'none';
+		}
+		const callculate = ()=>{
+			now = new Date().getTime();
+
+			// getting the secons
+			estimate = Math.floor((now - ourTimeMs)/1000);
+			
+			// getting the day
+			day = Math.floor(estimate / (3600 * 24));
+
+			estimate -= day * 3600 * 24;
+
+			// getting the hour
+			hour = Math.floor(estimate / 3600);
+
+			estimate -= hour * 3600;
+
+			// getting the minute
+			minute = Math.floor(estimate / 60);
+
+			estimate -= minute * 60;
+
+			display(String(day),String(hour),String(minute),String(estimate));
+		}
+		setInterval(callculate,1000);
+		callculate();
+	</script>
+</body>
+</html>
